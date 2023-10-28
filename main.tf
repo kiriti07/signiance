@@ -1,5 +1,7 @@
 provider "aws" {
   region = "us-east-1"
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
 }
 
 resource "aws_security_group" "app_sg" {
@@ -54,9 +56,10 @@ user_data = <<-EOF
 	      mkdir -p /home/ec2-user/.aws
               touch /root/credentials
               touch /home/ec2-user/credentials
-              echo "export AWS_ACCESS_KEY_ID=${var.aws_access_key}" >> /home/ec2-user/.aws/credentials
-              echo "export AWS_SECRET_ACCESS_KEY=${var.aws_secret_key}" >> /home/ec2-user/.aws/credentials
-              aws s3 cp s3://ssh-key-1/ssh-key/id_rsa /root/.ssh/
+              echo "[default]" >> /home/ec2-user/.aws/credentials
+              echo "aws_access_key_id = ${var.aws_access_key}" >> /home/ec2-user/.aws/credentials
+              echo "aws_secret_access_key = ${var.aws_secret_key}" >> /home/ec2-user/.aws/credentials      
+	      aws s3 cp s3://ssh-key-1/ssh-key/id_rsa /root/.ssh/
               aws s3 cp s3://ssh-key-1/ssh-key/id_rsa.pub /root/.ssh/
               aws s3 cp s3://ssh-key-1/ssh-key/id_rsa /home/ec2-user/.ssh/
               aws s3 cp s3://ssh-key-1/ssh-key/id_rsa.pub /home/ec2-user/.ssh/
