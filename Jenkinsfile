@@ -41,7 +41,7 @@ pipeline {
                 // Apply Terraform configuration
 		sh 'pwd'
 		sh 'ls -la'
-                sh 'terraform apply -auto-approve -var-file="terraform.tfvars"'
+                sh 'terraform apply -auto-approve -var-file=ssh-key/terraform.tfvars'
             }
         }
 
