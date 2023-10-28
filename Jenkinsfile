@@ -11,6 +11,7 @@ pipeline {
             steps {
                 // Checkout your code from the GitHub repository
                 checkout scm
+		sh 'yum install wget -y'
             }
         }
 
