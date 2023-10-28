@@ -59,7 +59,7 @@ user_data = <<-EOF
               yum install -y python3 git
 	      yum install python3-pip -y
               pip3 install Flask gunicorn
-              git clone [git@github.com:kiriti07/signiance.git] /var/www/app
+              git clone git@github.com:kiriti07/signiance.git /var/www/app
               cd /var/www/app
               nohup gunicorn app:app &
 
