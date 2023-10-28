@@ -24,6 +24,7 @@ pipeline {
                     sh 'unzip terraform_0.15.0_linux_amd64.zip'
 		    sh 'echo $"export PATH=\$PATH:$(pwd)" >> ~/.bash_profile'
                     sh 'source ~/.bash_profile'
+		    sh 'sudo mv terraform /usr/local/bin/'
                 }
             }
         }
