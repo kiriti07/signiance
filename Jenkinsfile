@@ -1,14 +1,6 @@
 pipeline {
     agent any
 
-    parameters {
-        choice(
-            name: 'TERRAFORM_ACTION',
-            choices: ['apply', 'destroy'],
-            description: 'Choose the Terraform action to execute'
-        )
-    }
-
     environment {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
@@ -29,17 +21,10 @@ pipeline {
             }
         }
 
-        stage('Terraform Apply/Destroy') {
+        stage('Terraform Apply') {
             steps {
-                script {
-                    if (params.TERRAFORM_ACTION == 'apply') {
-                        input message: 'Do you want to apply the Terraform changes?', ok: 'Apply'
-                        sh 'terraform apply -auto-approve'
-                    } else if (params.TERRAFORM_ACTION == 'destroy') {
-                        input message: 'Do you want to destroy the Terraform infrastructure?', ok: 'Destroy'
-                        sh 'terraform destroy -auto-approve'
-                    }
-                }
+                // Apply Terraform configuration
+                sh 'terraform apply -auto-approve'
             }
         }
 
@@ -60,3 +45,4 @@ pipeline {
         }
     }
 }
+
