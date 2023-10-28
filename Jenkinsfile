@@ -11,7 +11,19 @@ pipeline {
             steps {
                 // Checkout your code from the GitHub repository
                 checkout scm
-		sh 'yum install wget -y'
+		sh 'sudo yum install wget unzip curl -y'
+            }
+        }
+
+        stage('Install Terraform') {
+            steps {
+                script {
+                    def terraformVersion = '0.15.0'
+                    def downloadURL = "https://releases.hashicorp.com/terraform/${terraformVersion}/terraform_${terraformVersion}_linux_amd64.zip"
+                    sh "curl -o terraform.zip '${downloadURL}'"
+                    sh 'unzip terraform.zip'
+                    sh 'sudo mv terraform /usr/local/bin/'
+                }
             }
         }
 
