@@ -37,10 +37,11 @@ resource "aws_instance" "app_instance" {
 user_data = <<-EOF
               #!/bin/bash
               yum update -y
+              yum install git -y
               amazon-linux-extras install -y nginx1.12
               yum install -y python3 git
               pip3 install Flask gunicorn
-              git clone [Your-GitHub-Repo-URL] /var/www/app
+              git clone [git@github.com:kiriti07/signiance.git] /var/www/app
               cd /var/www/app
               nohup gunicorn app:app &
 
