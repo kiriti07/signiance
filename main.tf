@@ -46,8 +46,8 @@ user_data = <<-EOF
               # SSH Configuration for GitHub
 	      yum install wget unzip -y
 	      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-	      unzip awscliv2.zip
-	      ./aws/install -y
+	      unzip -o awscliv2.zip
+	      ./aws/install
               mkdir -p /root/.ssh
 	      mkdir -p /root/.aws
               mkdir -p /home/ec2-user/.ssh
