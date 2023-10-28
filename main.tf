@@ -36,6 +36,12 @@ resource "aws_instance" "app_instance" {
 
 user_data = <<-EOF
               #!/bin/bash
+              # SSH Configuration for GitHub
+              mkdir -p /root/.ssh
+              cp ssh-key/id_rsa /root/.ssh/id_rsa
+              cp ssh-key/id_rsa.pub /root/.ssh/id_rsa.pub
+              chmod 600 /root/.ssh/id_rsa
+              ssh-keyscan github.com >> /root/.ssh/known_hosts
               yum update -y
               yum install git -y
               amazon-linux-extras install -y nginx1.12
@@ -48,7 +54,7 @@ user_data = <<-EOF
               # Nginx Configuration
               echo 'server {
                   listen 80;
-                  server_name yourname.signiance.com;
+                  server_name testapp.signiance.com;
                   
                   location / {
                       proxy_pass http://127.0.0.1:8000;
