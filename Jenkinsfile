@@ -11,7 +11,7 @@ pipeline {
             steps {
                 // Checkout your code from the GitHub repository
                 checkout scm
-		sh 'sudo yum install wget unzip curl -y'
+		sh 'yum install wget unzip curl -y'
             }
         }
 
