@@ -44,12 +44,24 @@ resource "aws_instance" "app_instance" {
 user_data = <<-EOF
               #!/bin/bash
               # SSH Configuration for GitHub
+	      yum install wget unzip -y
+	      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+	      unzip awscliv2.zip
+	      ./aws/install
               mkdir -p /root/.ssh
-              cp ssh-key/id_rsa /root/.ssh/
-              cp ssh-key/id_rsa.pub /root/.ssh/
-              cp ssh-key/id_rsa /home/ec2-user/.ssh/
-              cp ssh-key/id_rsa.pub /home/ec2-user/.ssh/
+	      mkdir -p /root/.aws
+              mkdir -p /home/ec2-user/.ssh
+	      mkdir -p /home/ec2-user/.aws
+              touch /root/credentials
+              touch /home/ec2-user/credentials
+              echo "export AWS_ACCESS_KEY_ID=${var.aws_access_key}" >> /home/ec2-user/.aws/credentials
+              echo "export AWS_SECRET_ACCESS_KEY=${var.aws_secret_key}" >> /home/ec2-user/.aws/credentials
+              aws s3 cp s3://ssh-key-1/ssh-key/id_rsa /root/.ssh/
+              aws s3 cp s3://ssh-key-1/ssh-key/id_rsa.pub /root/.ssh/
+              aws s3 cp s3://ssh-key-1/ssh-key/id_rsa /home/ec2-user/.ssh/
+              aws s3 cp s3://ssh-key-1/ssh-key/id_rsa.pub /home/ec2-user/.ssh/
               chmod 600 /root/.ssh/id_rsa
+              chmod 600 /home/ec2-user/.ssh/id_rsa
               ssh-keyscan github.com >> /root/.ssh/known_hosts
               yum update -y
               yum install git -y
