@@ -18,6 +18,7 @@ pipeline {
         stage('Install Terraform') {
             steps {
                 script {
+		    sh 'rm -rf terraform*'
                     def terraformVersion = '0.15.0'
                     def downloadURL = "https://releases.hashicorp.com/terraform/${terraformVersion}/terraform_${terraformVersion}_linux_amd64.zip"
                     sh "sudo wget '${downloadURL}'"
