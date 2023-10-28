@@ -11,7 +11,7 @@ pipeline {
             steps {
                 // Checkout your code from the GitHub repository
                 checkout scm
-		sh 'sudo yum install wget unzip curl -y'
+		sh 'sudo yum install wget unzip -y'
             }
         }
 
@@ -20,9 +20,10 @@ pipeline {
                 script {
                     def terraformVersion = '0.15.0'
                     def downloadURL = "https://releases.hashicorp.com/terraform/${terraformVersion}/terraform_${terraformVersion}_linux_amd64.zip"
-                    sh "curl -o terraform.zip '${downloadURL}'"
-                    sh 'unzip terraform.zip'
-                    sh 'sudo mv terraform /usr/local/bin/'
+                    sh "sudo wget '${downloadURL}'"
+                    sh 'unzip terraform_0.15.0_linux_amd64.zip'
+		    sh 'echo $"export PATH=\$PATH:$(pwd)" >> ~/.bash_profile'
+                    sh 'source ~/.bash_profile'
                 }
             }
         }
