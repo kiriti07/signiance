@@ -47,7 +47,7 @@ user_data = <<-EOF
 	      yum install wget unzip -y
 	      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 	      unzip awscliv2.zip
-	      ./aws/install
+	      ./aws/install -y
               mkdir -p /root/.ssh
 	      mkdir -p /root/.aws
               mkdir -p /home/ec2-user/.ssh
