@@ -30,19 +30,5 @@ pipeline {
 
         // Add any additional stages as needed (e.g., tests, notifications)
     }
-
-    post {
-        always {
-            // Actions to always perform at the end, success or fail.
-        }
-        success {
-            // Actions to perform only when the pipeline was successful.
-            echo 'Operation successful!'
-        }
-        failure {
-            // Actions to perform if there was a failure.
-            echo 'Operation failed!'
-        }
-    }
 }
 
