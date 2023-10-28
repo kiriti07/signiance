@@ -39,7 +39,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 // Apply Terraform configuration
-                sh 'terraform apply -auto-approve'
+                sh 'terraform apply -auto-approve -var-file="terraform.tfvars"'
             }
         }
 
