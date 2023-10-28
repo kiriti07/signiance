@@ -1,3 +1,3 @@
 # signiance
-apps
+app
 --
