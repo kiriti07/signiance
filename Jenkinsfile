@@ -39,6 +39,8 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 // Apply Terraform configuration
+		sh 'pwd'
+		sh 'ls -la'
                 sh 'terraform apply -auto-approve -var-file="terraform.tfvars"'
             }
         }
