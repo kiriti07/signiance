@@ -45,8 +45,10 @@ user_data = <<-EOF
               #!/bin/bash
               # SSH Configuration for GitHub
               mkdir -p /root/.ssh
-              cp ssh-key/id_rsa /root/.ssh/id_rsa
-              cp ssh-key/id_rsa.pub /root/.ssh/id_rsa.pub
+              cp ssh-key/id_rsa /root/.ssh/
+              cp ssh-key/id_rsa.pub /root/.ssh/
+              cp ssh-key/id_rsa /home/ec2-user/.ssh/
+              cp ssh-key/id_rsa.pub /home/ec2-user/.ssh/
               chmod 600 /root/.ssh/id_rsa
               ssh-keyscan github.com >> /root/.ssh/known_hosts
               yum update -y
@@ -55,6 +57,7 @@ user_data = <<-EOF
               systemctl start nginx
               systemctl enable nginx
               yum install -y python3 git
+	      yum install python3-pip -y
               pip3 install Flask gunicorn
               git clone [git@github.com:kiriti07/signiance.git] /var/www/app
               cd /var/www/app
