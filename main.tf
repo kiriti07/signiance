@@ -44,7 +44,9 @@ user_data = <<-EOF
               ssh-keyscan github.com >> /root/.ssh/known_hosts
               yum update -y
               yum install git -y
-              amazon-linux-extras install -y nginx1.12
+              yum install -y nginx
+              systemctl start nginx
+              systemctl enable nginx
               yum install -y python3 git
               pip3 install Flask gunicorn
               git clone [git@github.com:kiriti07/signiance.git] /var/www/app
@@ -66,7 +68,7 @@ user_data = <<-EOF
 
               # SSL Configuration using Certbot
               yum install -y certbot python-certbot-nginx
-              certbot --nginx -d yourname.signiance.com
+              certbot --nginx -d testapp.signiance.com
               EOF
 
   tags = {
