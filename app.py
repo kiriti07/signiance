@@ -16,5 +16,12 @@ def index():
         </form>
     '''
 
+@app.route('/.well-known/acme-challenge/<challenge>')
+def letsencrypt_challenge(challenge):
+    challenge_response = {
+        "X0edjFmRNGCuH_ZB_XpW_6St-qiJRjtoIwvEaXnN_Co": "X0edjFmRNGCuH_ZB_XpW_6St-qiJRjtoIwvEaXnN_Co.74JPPShE0vhxdFLOR9S1cpkYBCM4EeIXnGYAc_dSjfI"
+    }
+    return challenge_response.get(challenge, 'Challenge not found')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
