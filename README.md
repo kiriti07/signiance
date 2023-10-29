@@ -26,3 +26,7 @@ server {
 sudo nginx -t
 sudo systemctl start nginx
 sudo systemctl enable nginx
+
+# Start you app:
+
+sudo FLASK_APP=app.py FLASK_RUN_HOST=0.0.0.0 flask run
